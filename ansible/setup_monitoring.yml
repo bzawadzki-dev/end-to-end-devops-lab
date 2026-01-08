@@ -1,0 +1,29 @@
+---
+- name: Instalacja Monitoringu
+  hosts: aws
+  become: yes
+  tasks:
+    - name: Kopiowanie konfiguracji Prometheusa
+      copy:
+        src: ./prometheus.yml
+        dest: /home/ubuntu/prometheus.yml
+
+    - name: Uruchomienie Prometheusa
+      docker_container:
+        name: prometheus
+        image: prom/prometheus
+        state: started
+        restart_policy: always
+        published_ports:
+          - "9090:9090"
+        volumes:
+          - /home/ubuntu/prometheus.yml:/etc/prometheus/prometheus.yml
+
+    - name: Uruchomienie Grafany
+      docker_container:
+        name: grafana
+        image: grafana/grafana
+        state: started
+        restart_policy: always
+        published_ports:
+          - "3000:3000"

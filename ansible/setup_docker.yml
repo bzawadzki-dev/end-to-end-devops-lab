@@ -1,0 +1,34 @@
+---
+- name: Konfiguracja Dockera na AWS
+  hosts: aws
+  become: yes
+  tasks:
+    - name: Aktualizacja cache apt
+      apt:
+        update_cache: yes
+
+    - name: Instalacja paczek wymaganych przez Dockera
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+
+    - name: Instalacja samego Dockera
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Uruchomienie i wlaczenie Dockera
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Dodanie uzytkownika ubuntu do grupy docker
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes
