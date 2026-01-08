@@ -1,10 +1,10 @@
-# Pliki systemowe i edytorów
+# System files
 .DS_Store
 Thumbs.db
 *.swp
 *~
 
-# Terraform - rozszerzona lista
+# Terraform
 .terraform/
 *.tfstate
 *.tfstate.backup
@@ -12,16 +12,16 @@ Thumbs.db
 *.tfvars
 *.tfvars.json
 
-# Ansible - pliki tymczasowe i retry
+# Ansible
 *.retry
 *.log
 
-# Jenkins - jeśli masz pliki lokalne z logami lub buildami
+# Jenkins
 **/target/
 **/build/
 .jenkins/
 
-# SSH i Klucze (Bardzo ważne!)
+# SSH and Keys
 *.pem
 *.pub
 id_rsa
